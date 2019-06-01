@@ -87,7 +87,7 @@ class Index extends React.Component {
 
     if (entry) {
       return (
-        <Redirect to="/user" />
+        <Redirect to="/todo" />
       )
     }
 

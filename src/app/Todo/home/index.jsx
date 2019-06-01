@@ -5,26 +5,32 @@ import { List, Table } from 'semantic-ui-react'
 
 const temas = [
   {
+    id: 0,
     title: 'Los Planetas',
     curso: 'Astronomia'
   },
   {
+    id: 1,
     title: 'Los dinosaurios',
     curso: 'Historia'
   },
   {
+    id: 2,
     title: 'Las plantas carnívoras',
     curso: 'Ciencias Ambientales'
   },
   {
+    id: 3,
     title: 'La edad de Piedra',
     curso: 'Historia'
   },
   {
+    id: 4,
     title: 'El agua',
     curso: 'Ciencias Ambientales'
   },
   {
+    id: 5,
     title: 'Los volcanes',
     curso: 'Geología'
   },
@@ -35,13 +41,13 @@ class Home extends React.Component {
     super()
     axios.defaults.baseURL = 'http://localhost:3001/'
     axios.defaults.headers.common = { 'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}` }
-    // console.log(`bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`)
   }
 
   state = {
     listUsers: [],
     loadingListUser: true,
     skilles: temas,
+    sendSkills: [],
   }
 
   componentDidMount() {
@@ -55,15 +61,33 @@ class Home extends React.Component {
       .catch(e => console.log('e', e))
   }
 
+  addCurso = (id) => {
+    const { skilles, sendSkills } = this.state
+    
+    console.log('click', id)
+
+    sendSkills.push(skilles[id])
+
+    skilles.splice(id, 1);
+
+    this.setState({
+      sendSkills,
+      skilles,
+    })
+
+  }
+
   render() {
 
-    const { listUsers, loadingListUser, skilles } = this.state
+    const { sendSkills, skilles } = this.state
+    console.log('skilles', skilles, sendSkills)
 
     return (
       <div
         style={
           {
-            display: 'flex'
+            display: 'flex',
+            margin: '0px 10% '
           }
         }
       >
@@ -84,12 +108,14 @@ class Home extends React.Component {
           </Table.Header>
           <Table.Body>
             {
-              listUsers &&
-              listUsers.map((user, i) => (
+              sendSkills &&
+              sendSkills.map((skill, i) => (
+                
                 <Table.Row key={i}>
-                  <Table.Cell>{user.nombres}</Table.Cell>
-                  <Table.Cell>{user.clase}</Table.Cell>
-                  <Table.Cell>{user.mail}</Table.Cell>
+                  {console.log('skill', skill)}
+                  <Table.Cell>{skill.title}</Table.Cell>
+                  <Table.Cell>{skill.curso}</Table.Cell>
+                  <Table.Cell>{skill.id}</Table.Cell>
                 </Table.Row>
               ))
             }
@@ -102,7 +128,8 @@ class Home extends React.Component {
               padding: '20px 50px'
             }
           }
-        >
+          >
+          <h4>Temas : </h4>
           {
             skilles.map((skill, i) => {
               return (
@@ -112,6 +139,9 @@ class Home extends React.Component {
                     <List.Header as='a'>{skill.title}</List.Header>
                     <List.Description as='a'>{skill.curso}</List.Description>
                   </List.Content>
+                  <List.Icon style={{cursor: 'pointer'}} name='plus' size='large' verticalAlign='middle'
+                    onClick={() => this.addCurso(skill.id)}
+                  />
                 </List.Item>
               )
             })

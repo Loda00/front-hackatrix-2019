@@ -16,19 +16,24 @@ class Header extends React.Component {
   }
 
   render() {
+    const jwt = JSON.parse(sessionStorage.getItem('jwt'))
+    console.log('jwt', !jwt)
     return (
       <div>
-        <div className="content-menu">
-          <div className="menu">
-            <div><Link to="/todo">Home</Link></div>
-            <div><Link to="/user">Alumnos</Link></div>
-            <div>Otros</div>
-          </div>
-          <div className="logo">
-            <Image src={logo} />
-          </div>
-        </div>
-
+        {
+          jwt && (
+            <div className="content-menu">
+              <div className="menu">
+                <div><Link to="/todo">Home</Link></div>
+                <div><Link to="/user">Alumnos</Link></div>
+                <div><Link>Otros</Link></div>
+              </div>
+              <div className="logo">
+                <Image src={logo} />
+              </div>
+            </div>
+          )
+        }
         <Switch>
           <Route
             exact
