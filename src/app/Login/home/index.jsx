@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import { Redirect, Switch, Route, BrowserRouter } from 'react-router-dom'
 import { isEmpty } from 'lodash'
-import logo from '../../../assets/img/logo.png'
+import logo from '../../../assets/img/logoMain.png'
 import jwt from 'jsonwebtoken'
 import axios from 'axios'
 
@@ -60,8 +60,8 @@ class Index extends React.Component {
     }
 
     const data = {
-      id_email: user,
-      password: pass,
+      mail: user,
+      pass: pass,
     }
 
     if (!isValid) return;
@@ -87,7 +87,7 @@ class Index extends React.Component {
 
     if (entry) {
       return (
-        <Redirect to="/todo" />
+        <Redirect to="/user" />
       )
     }
 
