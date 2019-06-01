@@ -21,7 +21,6 @@ class Index extends React.Component {
     passError: false,
     errorLogIn: false,
     entry: false,
-    
   }
 
   handleChangeInput = (e) => {
@@ -69,7 +68,7 @@ class Index extends React.Component {
 
     axios.post('api/login', data)
       .then(res => {
-        if (res.data.token) {
+        if (res.data) {
           sessionStorage.setItem('jwt', JSON.stringify(res.data.token));
           this.setState({
             entry: true,

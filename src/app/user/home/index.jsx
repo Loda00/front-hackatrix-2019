@@ -8,7 +8,7 @@ class HomeUser extends React.Component {
   constructor() {
     super()
     axios.defaults.baseURL = 'http://localhost:3001/'
-    axios.defaults.headers.common = {'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`}
+    // axios.defaults.headers.common = {'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`}
     // console.log(`bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`)
   }
   

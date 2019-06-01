@@ -11,7 +11,7 @@ class User extends React.Component {
     return (
       <React.Fragment>
         <Switch>
-          <Route 
+          <Route
             exact
             path="/user"
             component={HomeUser}
@@ -28,7 +28,7 @@ class User extends React.Component {
           />
           <Route
             component={NotFound}
-          />  
+          />
         </Switch>
       </React.Fragment>
     )

@@ -9,11 +9,11 @@ class Home extends React.Component {
 
   render() {
 
-    return(
+    return (
       <React.Fragment>
         <Switch>
           <Route exact path="/todo" component={HomeTodo} />
-          <Route exact path="/todo/show" component={Show} /> 
+          <Route exact path="/todo/show" component={Show} />
           <Route component={NotFound} />
         </Switch>
       </React.Fragment>
